@@ -36,6 +36,7 @@ Pycharm: File>Settings>File and Code Templates>Python Script
 
 # 标准库导入
 import platform
+from typing import List
 
 # 第三方库导入
 import redis
@@ -46,8 +47,8 @@ from .tools import excel_tool, img_tool, video_tool
 GLOBAL_VARIABLE = "GLOBAL VARIABLE"
 
 
-class Python3StyleGuide(object):
-    """Python 3 编码可读性参考类 (类文档说明参考案例）
+class PythonStyleGuide:
+    """Python 编码可读性参考类 (类文档说明参考案例）
 
     文档说明的格式：
     1. 紧跟申明对象的下一行开始，用成对的连续三个双引号包含说明的内容。
@@ -58,11 +59,13 @@ class Python3StyleGuide(object):
        考这段。
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         # 初始化类属性
         self._bits = -1
 
-    def get_system_architecture(self, executable, bits: str, linkage=""):
+    def get_system_architecture(
+        self, executable: List[str], bits: str, linkage: str = ""
+    ) -> int:
         """获取系统架构 （函数文档说明参考案例）
 
         提取系统的架构信息，返回数字值形式方便项目其他函数调用。
@@ -86,7 +89,7 @@ class Python3StyleGuide(object):
 
             sys_arch = platform.architecture(executable, bits, linkage)
             self._bits = int(sys_arch[0].replace("bit", ""))
-        except Exception:
+        except TypeError:  # 一般情况下不`except Exception`, 而是捕捉具体的错误类型
             # 部分Unix操作系统中的file命令实现会影响到命令执行结果
             self._bits = -1
 

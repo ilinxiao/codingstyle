@@ -1,0 +1,9 @@
+[flake8]
+max-line-length = 90
+exclude =
+    .venv/
+    */migrations/
+    # TODO: custom thrift rpc module to match flake8
+    #payment/ccbs/,
+    # TODO: improve code of this modules
+    #payment/alipays/, payment/wechats/,
