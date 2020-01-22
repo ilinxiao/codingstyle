@@ -1,4 +1,4 @@
-"""Python 提高编码可读性建议
+"""Python 提高编码可读性建议 （模块文档说明参考案例）
 
 提高项目代码的可读性：
 1. 为公共模块，类，函数编写文档说明（Docstrings)。
@@ -9,14 +9,19 @@
 4. 这里的函数包括函数(def写在class外面)、方法(def写在class里面)、生成器。函数的文档说
    明应该包含函数做什么, 以及输入和输出的详细描述。非公共的函数没有必要，但是应该有一个
    描述函数具体作用的注释。短小、简单明了的函数可以省略文档说明和注释。
-4. 当代码更改时，优先更新对应的文档说明和注释。
-3. 用自己熟悉的语言。
-
+4. 当代码更改时，优先更新对应的文档说明和注释。一个模块或者类在进行了重大升级之后，比如
+   更换了实现框架、请求的方式等，除了补充更新内容以外，根据需要添加更新作者、时间等信息。
+3. 用自己熟悉的语言，英文或中文，写文档说明。鼓励多写关于对业务的理解和技术实现细节，一段
+   理解不够深的文字，加上具体的没有搞清楚的问题和把具体问题搞清楚之后的文字是等价的。
+x. TODO待办清单可以指定创建人和指定人，写在文档说明空一行之后。参考下方示例。
 -------------------------------------------------------------------
-如果你使用IDE工具，建议添加如下设置，自动添加文件头，保持代码风格一致：
+推荐配置：
+如果你使用IDE工具，建议添加如下设置，自动添加文件头：
 Pycharm: File>Settings>File and Code Templates>Python Script
 
 文件头内容参考template文件, 使用前替换自己的信息。
+
+文件头的信息对BUG跟踪会起到一定的帮助，所以只是推荐添加这项配置，并不是必须要求。
 -------------------------------------------------------------------
 
 @author: LX
@@ -37,7 +42,7 @@ GLOBAL_VARIABLE = "GLOBAL VARIABLE"
 
 
 class Python3StyleGuide(object):
-    """Python 3 编码可读性参考类
+    """Python 3 编码可读性参考类 (类文档说明参考案例）
 
     文档说明的格式：
     1. 紧跟申明对象的下一行开始，用成对的连续三个双引号包含说明的内容。
@@ -53,7 +58,7 @@ class Python3StyleGuide(object):
         self._bits = -1
 
     def get_system_architecture(self, executable, bits: str, linkage=""):
-        """获取系统架构
+        """获取系统架构 （函数文档说明参考案例）
 
         提取系统的架构信息，返回数字值形式方便项目其他函数调用。
         (在Pycharm中，在函数下面连续输入三个双引号会自动生成以下输入输出说明。)
@@ -66,20 +71,19 @@ class Python3StyleGuide(object):
         :raises: 抛出异常说明，没有可以忽略
         """
 
-        # TODO(添加人/指定人) 待做事项格式
+        # TODO(添加人/指定人) 待做事项格式 （TODO参考案例）
         # TODO(LX) 查清楚 architecture 方法第三个参数 linkage 对运行结果的影响
 
         try:
             # 现有系统接口返回的系统架构信息是由文字形式的系统位数和linkage组成的二元组
             # 格式参考:('64bit', 'ELF')，目的是提取元祖的第一个元素中的数字值
+            # （块注释参考案例）
 
             sys_arch = platform.architecture(executable, bits, linkage)
-            sys_arch = int(sys_arch[0].replace("bit", ""))
+            self._bits = int(sys_arch[0].replace("bit", ""))
         except Exception:
-            # 部分Unix操作系统中的file命令实现会影响到命令执行结果
+            # 部分Unix操作系统中的file命令实现会影响到命令执行结果 
             self._bits = -1
-        else:
-            self._bits = sys_arch
 
         return self._bits
 
