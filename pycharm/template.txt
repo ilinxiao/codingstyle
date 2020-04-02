@@ -3,6 +3,6 @@
 内容
 
 @author: name
-@contact: name@esoaru.com
+@contact: chunjinge@gmail.com
 @time: ${DATE} ${TIME}
 """
